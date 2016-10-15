@@ -13,8 +13,11 @@ def pairwise(it):
         yield next(it), next(it)
 
 def object_as_dict(obj):
-    return {c.key: getattr(obj, c.key)
+    data = {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
+    color = Category.query.filter(Category.id == obj.category_id).first().color
+    data['color'] = color
+    return data
 
 @blueprint.route('/')
 def index():

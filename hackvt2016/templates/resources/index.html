@@ -155,14 +155,19 @@
                   marker.setMap(null);
                 });
                 data = [];
+
                 resources.forEach(function(resource) {
 
                   r_location = {lat: resource.latitude, lng: resource.longitude};
+
+                  var pinColor = resource.color;
+                  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor);
 
                   // Create a marker for each place.
                   data.push(new google.maps.Marker({
                     map: map,
                     title: resource.name,
+                    icon: pinImage,
                     position: r_location
                   }));
                 });
