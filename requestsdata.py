@@ -1,6 +1,7 @@
 import requests
 from hackvt2016.app import create_app
 from hackvt2016.resource.models import Resource
+from hackvt2016.category.models import Category
 
 def main():
     create_app().app_context().push()
@@ -8,33 +9,21 @@ def main():
     jsonObject = thisRequest.json()
     jsonObject[0]
 
-    #print(jsonObject)
+    Resource.query.delete()
 
 
 
     for entry in jsonObject:
-    	category = "library"
-    	location = "location"
-    	title = entry.get("library")
-    	description = "Town Public Library"
-    	host = ""
-    	email = ""
-    	locationID = 1
-    	categoryID = 1
+        category = "library"
+        location = "location"
+        title = entry.get("library")
+        description = "Town Public Library"
+        host = ""
+        email = ""
+        categoryID = Category.query.filter_by(name='Library').first().id
 
 
-    #Resource.create(title=title, description=description,host=host, email=email,location_id=locationID,category_id=categoryID)
-    Resource.create(title=title, description=description,host=host, email=email, category_id=1)
-
-
-    	#pull each attribute from data set
-
-
-    #print(jsonObject[0].get("type_access"))
-
-    #create csv reader
-
-    #
+        Resource.create(title=title, description=description,host=host, email=email, category_id=categoryID)
 
 if __name__ == '__main__':
     main()
