@@ -17,7 +17,14 @@ def load_seeds():
 
     """
     max longitudes and latitudes:
+    Coordinates
 
+[5:55]  
+lat: 42.777 - 44.953
+long: (-72.632) - (-73.132)
+
+lat: 44.452 - 44.953
+long: (-71.739) - (-72.632)
 
     """
     random.randrange(73, )
@@ -32,7 +39,14 @@ def load_seeds():
         ('Event', 'Gymnastics Open Hours', 'Open to all age ranges', 'Lydia Kiles', 'opengym@opengym.org')
         ('Museum', 'Middle Age Weapons Musuem', 'Open 10-5 Daily', 'Brianna Wright', 'mawm@museums.org')
         ('Nature Site', 'Hunter Trail', 'Requires appropriate footwear', '', '')
-        //('Cool Stuff', )
+        ('Cool Stuff', 'Alden Partridge Monument', 'In memory of the Norwich University Founder', '', '')
+        ('Cool Stuff', 'Ski Range', 'Bring your skis!', '', '')
+        ('Sports', 'Karate Lessons', 'Tae Kwon Do', 'Sensei Vivian', 'themaster@thekaratestudio.com')
+        ('Nature Site', 'Crystal Mine Lake', 'No lifeguard on duty', 'Trevor Daniels', 'fri@.mns.org')
+        ('Resource', 'School Supplies and Book Store', 'For all your education needs!', '', 'theotherstaples@bookstores.com')
+        ('Musuem', 'Stone House Historical Center', 'With live in actors', 'Manny Curtis', 'mcurtis@stonehouse.org')
+        ('Musuem', 'VT Historical Archives', 'Open 8 to 4 on weekdays', '', 'admin@vtarchives.org')
+        ('Resource', 'Musical Studio', 'Instruments and soundrooms available to reserve', '', 'mstudio@vtmusic.net'\)
     ]
     for (category, title, description, host, email, longitude, latitude) in resources:
         categoryID = Category.query.filter_by(name=category).first().id
