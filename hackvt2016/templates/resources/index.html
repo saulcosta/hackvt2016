@@ -3,12 +3,174 @@
 {% block content %}
   <div class="row" style="height:100%">
     <div class="col-md-3" id="sidebar">
-      {% include "resources/sidebar.html" %}
+      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
+      {% for (category1, category2) in categories %}
+        <div class="row category-row">
+          <div class="col-md-6 category-outer">
+            <div class="category-inner" data-id={{category1.id}}>
+            <i class="fa fa-{{ category1.icon }}"></i>
+            <span class="category-name">{{ category1.name }}</span>
+            </div>
+          </div>
+          <div class="col-md-6 category-outer">
+            <div class="category-inner" data-id={{category2.id}}> 
+            <i class="fa fa-{{ category2.icon }}"></i>
+            <span class="category-name">{{ category2.name }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
       </div>
       <div class="col-md-9" id="map-container">
-        {% include "resources/map.html" %}
+        <div id="map"></div>
         </div>
   </div>
 
-{% endblock %}
+<script>
+    function initAutocomplete() {
+        styles = [
+          {
+            "featureType": "administrative",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          }
+        ]
 
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 44.518070, lng: -73.184468},
+          zoom: 13,
+          mapTypeId: 'roadmap',
+          styles: styles
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+
+        // category id logic
+        localStorage.removeItem('cat_ids');
+        $('.category-inner').click(function() {
+          var cat_ids = [];
+          if (localStorage.getItem("cat_ids")) {
+            var cat_ids = JSON.parse(localStorage.getItem("cat_ids"));
+          }
+          var id = $(this).data('id');
+          if ($(this).hasClass('active')) {
+            index = cat_ids.indexOf(id);
+            if (index > -1) {
+                cat_ids.splice(index, 1);
+            }
+          }
+          else {
+            cat_ids.push(id);
+          }
+          $(this).toggleClass('active');
+          localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
+
+          // Request data from server
+          $.ajax({
+            url: '/resources',
+            data: { ids: cat_ids },
+            success: function(data) {
+                data.forEach(function(resource) {
+
+                  r_location = {lat: resource.latitude, lng: resource.longitude};
+
+                  console.log(resource);
+
+                  // Create a marker for each place.
+                  markers.push(new google.maps.Marker({
+                    map: map,
+                    title: resource.name,
+                    position: r_location
+                  }));
+                });
+            },
+            dataType: 'json'
+          });
+        });
+      }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCX_bLPe9VVExFw_89M3viU54AKUzDG1HE&callback=initAutocomplete&libraries=places">
+</script>
+
+{% endblock %}
