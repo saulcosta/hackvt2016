@@ -2,7 +2,7 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from hackvt2016 import commands, public, user, resource, category
+from hackvt2016 import commands, resource, category
 from hackvt2016.assets import assets
 from hackvt2016.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from hackvt2016.settings import DevConfig
@@ -38,8 +38,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     """Register Flask blueprints."""
-    app.register_blueprint(public.views.blueprint)
-    app.register_blueprint(user.views.blueprint)
+    # app.register_blueprint(public.views.blueprint)
     return None
 
 
