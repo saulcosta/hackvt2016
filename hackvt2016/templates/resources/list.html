@@ -1,16 +1,41 @@
 {% for (category1, category2) in categories %}
-  <div class="row caregory-row">
+  <div class="row category-row">
     <div class="col-md-6 category-outer">
-      <div class="category-inner">
+      <div class="category-inner" data-id={{category1.id}}>
       <i class="fa fa-{{ category1.icon }}"></i>
       <span class="category-name">{{ category1.name }}</span>
       </div>
     </div>
     <div class="col-md-6 category-outer">
-      <div class="category-inner"> 
+      <div class="category-inner" data-id={{category2.id}}> 
       <i class="fa fa-{{ category2.icon }}"></i>
       <span class="category-name">{{ category2.name }}</span>
       </div>
     </div>
   </div>
 {% endfor %}
+
+<script>
+  $(document).ready(function() {
+    localStorage.removeItem('cat_ids');
+    $('.category-inner').click(function() {
+      var cat_ids = [];
+      if (localStorage.getItem("cat_ids")) {
+        var cat_ids = JSON.parse(localStorage.getItem("cat_ids"));
+      }
+      var id = $(this).data('id');
+      if ($(this).hasClass('active')) {
+        index = cat_ids.indexOf(id);
+        if (index > -1) {
+            cat_ids.splice(index, 1);
+        }
+      }
+      else {
+        cat_ids.push(id);
+      }
+      $(this).toggleClass('active');
+      localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
+    });
+  });
+
+</script>
