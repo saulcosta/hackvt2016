@@ -1,0 +1,16 @@
+{% for (category1, category2) in categories %}
+  <div class="row caregory-row">
+    <div class="col-md-6 category-outer">
+      <div class="category-inner">
+      <i class="fa fa-{{ category1.icon }}"></i>
+      <span class="category-name">{{ category1.name }}</span>
+      </div>
+    </div>
+    <div class="col-md-6 category-outer">
+      <div class="category-inner"> 
+      <i class="fa fa-{{ category2.icon }}"></i>
+      <span class="category-name">{{ category2.name }}</span>
+      </div>
+    </div>
+  </div>
+{% endfor %}

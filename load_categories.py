@@ -7,11 +7,12 @@ from hackvt2016.category.models import Category
 
 def main():
     create_app().app_context().push()
+    Category.query.delete()
     categories = [
         ('Library', 'book'),
         ('Event', 'map-pin'),
         ('Sports', 'soccer-ball-o'),
-        ('Point of Interest', 'search'),
+        ('Cool Stuff', 'search'),
         ('Museum', 'bookmark'),
         ('Resource', 'pencil'),
         ('Nature Site', 'pagelines')]
