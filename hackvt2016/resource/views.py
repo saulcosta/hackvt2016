@@ -12,17 +12,28 @@ def pairwise(it):
     while True:
         yield next(it), next(it)
 
+
 def object_as_dict(obj):
     data = {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
     color = Category.query.filter(Category.id == obj.category_id).first().color
     data['color'] = color
+    data['infowindow'] = infowindow(obj)
     return data
+
+
+def infowindow(resource):
+  return '''
+    <h3>%s</h3>
+    <p>%s</pr>
+  ''' % (resource.title, resource.description)
+
 
 @blueprint.route('/')
 def index():
     categories = pairwise(Category.query.all())
     return render_template('resources/index.html', categories=categories)
+
 
 @blueprint.route('/resources')
 def resources():

@@ -28,154 +28,162 @@
   </div>
 
 <script>
-    function initAutocomplete() {
-        styles = [
-          {
-            "featureType": "administrative",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road",
-            "elementType": "labels.icon",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "transit",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          }
-        ]
+function initAutocomplete() {
+    styles = [{
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [{
+            "visibility": "off"
+        }]
+    }, {
+        "featureType": "poi",
+        "stylers": [{
+            "visibility": "off"
+        }]
+    }, {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [{
+            "visibility": "off"
+        }]
+    }, {
+        "featureType": "transit",
+        "stylers": [{
+            "visibility": "off"
+        }]
+    }]
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 44.518070, lng: -73.184468},
-          zoom: 13,
-          mapTypeId: 'roadmap',
-          styles: styles
-        });
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 44.518070,
+            lng: -73.184468
+        },
+        zoom: 13,
+        mapTypeId: 'roadmap',
+        styles: styles
+    });
 
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+    });
 
-        var markers = [];
-        var data = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
+    var markers = [];
+    var data = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
 
-          if (places.length == 0) {
+        if (places.length == 0) {
             return;
-          }
+        }
 
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
+        // Clear out the old markers.
+        markers.forEach(function(marker) {
             marker.setMap(null);
-          });
-          markers = [];
+        });
+        markers = [];
 
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
             if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
+                console.log("Returned place contains no geometry");
+                return;
             }
 
             // Create a marker for each place.
             markers.push(new google.maps.Marker({
-              map: map,
-              title: place.name,
-              position: place.geometry.location
+                map: map,
+                title: place.name,
+                position: place.geometry.location
             }));
 
             if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
             } else {
-              bounds.extend(place.geometry.location);
+                bounds.extend(place.geometry.location);
             }
-          });
-          map.fitBounds(bounds);
         });
+        map.fitBounds(bounds);
+    });
 
-        // category id logic
-        localStorage.removeItem('cat_ids');
-        $('.category-inner').click(function() {
-          var cat_ids = [];
-          if (localStorage.getItem("cat_ids")) {
-            var cat_ids = JSON.parse(localStorage.getItem("cat_ids"));
-          }
-          var id = $(this).data('id');
-          if ($(this).hasClass('active')) {
-            index = cat_ids.indexOf(id);
-            if (index > -1) {
-                cat_ids.splice(index, 1);
+    // category id logic
+    localStorage.removeItem('cat_ids');
+    $('.category-inner').click(function() {
+            var cat_ids = [];
+            if (localStorage.getItem("cat_ids")) {
+                var cat_ids = JSON.parse(localStorage.getItem("cat_ids"));
             }
-          }
-          else {
-            cat_ids.push(id);
-          }
-          $(this).toggleClass('active');
-          localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
+            var id = $(this).data('id');
+            if ($(this).hasClass('active')) {
+                index = cat_ids.indexOf(id);
+                if (index > -1) {
+                    cat_ids.splice(index, 1);
+                }
+            } else {
+                cat_ids.push(id);
+            }
+            $(this).toggleClass('active');
+            localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
 
-          // Request data from server
-          $.ajax({
-            url: '/resources',
-            data: { ids: cat_ids },
-            success: function(resources) {
-                // reset old data
-                data.forEach(function(marker) {
-                  marker.setMap(null);
-                });
-                data = [];
+            // Request data from server
+            $.ajax({
+                    url: '/resources',
+                    data: {
+                        ids: cat_ids
+                    },
+                    success: function(resources) {
+                        // reset old data
+                        data.forEach(function(oldmarker) {
+                            oldmarker.setMap(null);
+                        });
+                        data = [];
 
-                resources.forEach(function(resource) {
+                        for (i = 0; i < resources.length; i++) {
+                            var resource = resources[i];
 
-                  r_location = {lat: resource.latitude, lng: resource.longitude};
+                            r_location = {
+                                lat: resource.latitude,
+                                lng: resource.longitude
+                            };
 
-                  var pinColor = resource.color;
-                  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor);
+                            var pinColor = resource.color;
+                            var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor);
 
-                  // Create a marker for each place.
-                  data.push(new google.maps.Marker({
-                    map: map,
-                    title: resource.name,
-                    icon: pinImage,
-                    position: r_location
-                  }));
-                });
-            },
-            dataType: 'json'
-          });
-        });
-      }
+                            // Create a marker for each place.
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                title: resource.name,
+                                icon: pinImage,
+                                position: r_location,
+                                id: resource.id,
+                                animation: google.maps.Animation.DROP,
+                                content: resource.infowindow
+                            });
+                            var infowindow = new google.maps.InfoWindow();
+                            google.maps.event.addListener(marker, 'click', (function(marker, i, infowindow) {
+                                return function() {
+                                    infowindow.setContent(this.content);
+                                    infowindow.open(map, this);
+                                };
+                            })(marker, i, infowindow));
+
+                            // google.maps.event.trigger(marker, 'click');
+                            data.push(marker);
+                        }
+                },
+                dataType: 'json'
+            });
+    });
+}
 
 </script>
 <script async defer
