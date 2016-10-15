@@ -23,10 +23,9 @@ def object_as_dict(obj):
 
 
 def infowindow(resource):
-  return '''
-    <h3>%s</h3>
-    <p>%s</pr>
-  ''' % (resource.title, resource.description)
+  info = '<h3>%s</h3><p><a href="https://www.google.com/maps/dir/Current+Location/%s,%s" target="_blank">Map</a></p><strong>Description</strong><p>%s</p>' % (resource.title, str(resource.latitude), str(resource.longitude), resource.description)
+
+  return info
 
 
 @blueprint.route('/')
