@@ -3,7 +3,7 @@
 {% block content %}
   <div class="row" style="height:100%">
     <div class="col-xs-3" id="sidebar">
-      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+      <input id="pac-input" class="controls" type="text" placeholder="Enter street address">
 
       {% for (category1, category2) in categories %}
         <div class="row category-row">
@@ -21,7 +21,7 @@
           </div>
         </div>
       {% endfor %}
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Resource</button>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Submit Resource</button>
 
       </div>
       <div class="col-xs-9" id="map-container">
@@ -141,13 +141,16 @@ function initAutocomplete() {
                 var cat_ids = JSON.parse(localStorage.getItem("cat_ids"));
             }
             var id = $(this).data('id');
+            var color = $(this).css("border-left-color");
             if ($(this).hasClass('active')) {
                 index = cat_ids.indexOf(id);
                 if (index > -1) {
                     cat_ids.splice(index, 1);
                 }
+                $(this).css({'background-color': 'white', color: color})
             } else {
                 cat_ids.push(id);
+                $(this).css({'background-color': color, color: 'white'})
             }
             $(this).toggleClass('active');
             localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
