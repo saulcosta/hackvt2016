@@ -27,7 +27,7 @@ lat: 44.452 - 44.953
 long: (-71.739) - (-72.632)
 
     """
-    for _ in xrange(10):
+    for index in xrange(10):
         resources = [
             ('Sports', 'Softball Practice', 'Weekly softball practice - bring gear!', 'Theo Fido', 'tfo@softball.com'),
             ('Event', 'Calligraphy Lesson', 'Workshop for Calligraphy Lessons', 'Tanner Riley', 'triley@clriley.com'),
@@ -57,8 +57,8 @@ long: (-71.739) - (-72.632)
                 description=description,
                 host=host,
                 email=email,
-                longitude=random.uniform(-73.132, -72.632),
-                latitude=random.uniform(42.777, 44.953))
+                longitude=random.uniform(-73.132, -72.632) if index <= 7 else random.uniform(-72.632, -71.739),
+                latitude=random.uniform(42.777, 44.953) if index <= 7 else random.uniform(44.452, 44.953))
 
 
 def load_libraries():
