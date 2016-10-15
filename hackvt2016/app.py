@@ -2,7 +2,7 @@
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
 
-from hackvt2016 import commands, public, user
+from hackvt2016 import commands, public, user, models
 from hackvt2016.assets import assets
 from hackvt2016.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
 from hackvt2016.settings import ProdConfig
