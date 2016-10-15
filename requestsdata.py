@@ -32,7 +32,7 @@ long: (-71.739) - (-72.632)
             ('Sports', 'Softball Practice', 'Weekly softball practice - bring gear!', 'Theo Fido', 'tfo@softball.com'),
             ('Event', 'Calligraphy Lesson', 'Workshop for Calligraphy Lessons', 'Tanner Riley', 'triley@clriley.com'),
             ('Nature Site', 'Geocache', 'Placed in 1971', '', ''),
-            ('Event', 'Oliver Twist Rehearsal', 'Auditions for the Oliver Twist play', 'Julia Reynolds', 'middleproductions@'),
+            ('Event', 'Oliver Twist Rehearsal', 'Auditions for the Oliver Twist play', 'Julia Reynolds', 'middleproductions@yahoo.com'),
             ('Sports', 'Soccer Game', 'Everyone is invited to a quick soccer game this weekend.', 'Saul Costa', 'saulcosta18222@gmail.com'),
             ('Resource', 'AndreWorks Studio', 'Available for reservations', 'Andrew Minor', 'aminor@andreworks.org'),
             ('Event', 'Gymnastics Open Hours', 'Open to all age ranges', 'Lydia Kiles', 'opengym@opengym.org'),
@@ -69,12 +69,15 @@ def load_libraries():
         category = 'library'
         latitude = entry.get('location_1').get('latitude')
         longitude = entry.get('location_1').get('longitude')
-        title = entry.get('library')
-        description = 'website: ' + str(entry.get('web_location'))
+        title = entry.get('library') + ' Library'
+        description = 'Local library.'
+        email = None
+        if entry.get('web_location'):
+            email = entry.get('web_location')
         categoryID = Category.query.filter_by(name='Library').first().id
 
         if latitude and longitude:
-            Resource.create(title=title, description=description, category_id=categoryID, latitude=latitude, longitude=longitude)
+            Resource.create(title=title, description=description, category_id=categoryID, latitude=latitude, longitude=longitude, email=email)
 
 
 if __name__ == '__main__':
