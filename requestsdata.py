@@ -9,21 +9,23 @@ def main():
     jsonObject = thisRequest.json()
     jsonObject[0]
 
-    Resource.query.delete()
-
+    #Resource.query.delete()
+    #Category.create(id=1, name="library", )
 
 
     for entry in jsonObject:
         category = "library"
-        location = "location"
+        latitude = entry.get("latitude")
+        longitude = entry.get("longitude")
+        location = "latitude" + "," + "longitude"
         title = entry.get("library")
-        description = "Town Public Library"
-        host = ""
-        email = ""
+        description = "website: " + str(entry.get("web_location"))
         categoryID = Category.query.filter_by(name='Library').first().id
 
 
-        Resource.create(title=title, description=description,host=host, email=email, category_id=categoryID)
+        #Resource.create(title=title, description=description,host=host, email=email, category_id=categoryID)
+        Resource.create(title=title, description=description, category_id=categoryID,)
+
 
 if __name__ == '__main__':
     main()
