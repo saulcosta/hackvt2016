@@ -35,6 +35,16 @@
       }
       $(this).toggleClass('active');
       localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
+
+      // Request data from server
+      $.ajax({
+        url: '/resources',
+        data: { foo: cat_ids },
+        success: function(data) {
+          console.log(data);
+        },
+        dataType: 'json'
+      });
     });
   });
 
