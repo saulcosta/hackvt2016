@@ -24,7 +24,7 @@ def main():
 
 
     #Resource.create(title=title, description=description,host=host, email=email,location_id=locationID,category_id=categoryID)
-    Resource.create(title=title, description=description,host=host, email=email)
+    Resource.create(title=title, description=description,host=host, email=email, category_id=1)
 
 
     	#pull each attribute from data set
