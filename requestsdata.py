@@ -27,37 +27,38 @@ lat: 44.452 - 44.953
 long: (-71.739) - (-72.632)
 
     """
-    random.randrange(73, )
-
-    resources = [
-        ('Sports', 'Softball Practice', 'Weekly softball practice - bring gear!', 'Theo Fido', 'tfo@softball.com')
-        ('Event', 'Calligraphy Lesson', 'Workshop for Calligraphy Lessons', 'Tanner Riley', 'triley@clriley.com')
-        ('Nature Site', 'Geocache', 'Placed in 1971', '', '')
-        ('Event', 'Oliver Twist Rehearsal', 'Auditions for the Oliver Twist play', 'Julia Reynolds', 'middleproductions@')
-        ('Sports', 'Soccer Game', 'Everyone is invited to a quick soccer game this weekend.', 'Saul Costa', 'saulcosta18222@gmail.com')
-        ('Resource', 'AndreWorks Studio', 'Available for reservations', 'Andrew Minor', 'aminor@andreworks.org')
-        ('Event', 'Gymnastics Open Hours', 'Open to all age ranges', 'Lydia Kiles', 'opengym@opengym.org')
-        ('Museum', 'Middle Age Weapons Musuem', 'Open 10-5 Daily', 'Brianna Wright', 'mawm@museums.org')
-        ('Nature Site', 'Hunter Trail', 'Requires appropriate footwear', '', '')
-        ('Cool Stuff', 'Alden Partridge Monument', 'In memory of the Norwich University Founder', '', '')
-        ('Cool Stuff', 'Ski Range', 'Bring your skis!', '', '')
-        ('Sports', 'Karate Lessons', 'Tae Kwon Do', 'Sensei Vivian', 'themaster@thekaratestudio.com')
-        ('Nature Site', 'Crystal Mine Lake', 'No lifeguard on duty', 'Trevor Daniels', 'fri@.mns.org')
-        ('Resource', 'School Supplies and Book Store', 'For all your education needs!', '', 'theotherstaples@bookstores.com')
-        ('Musuem', 'Stone House Historical Center', 'With live in actors', 'Manny Curtis', 'mcurtis@stonehouse.org')
-        ('Musuem', 'VT Historical Archives', 'Open 8 to 4 on weekdays', '', 'admin@vtarchives.org')
-        ('Resource', 'Musical Studio', 'Instruments and soundrooms available to reserve', '', 'mstudio@vtmusic.net'\)
-    ]
-    for (category, title, description, host, email, longitude, latitude) in resources:
-        categoryID = Category.query.filter_by(name=category).first().id
-        Resource.create(
-            category_id=categoryID,
-            title=title,
-            description=description,
-            host=host,
-            email=email,
-            longitude=random.uniform(-73.132, -72.632),
-            latitude=random.uniform(42.777, 44.953))
+    for _ in xrange(10):
+        resources = [
+            ('Sports', 'Softball Practice', 'Weekly softball practice - bring gear!', 'Theo Fido', 'tfo@softball.com'),
+            ('Event', 'Calligraphy Lesson', 'Workshop for Calligraphy Lessons', 'Tanner Riley', 'triley@clriley.com'),
+            ('Nature Site', 'Geocache', 'Placed in 1971', '', ''),
+            ('Event', 'Oliver Twist Rehearsal', 'Auditions for the Oliver Twist play', 'Julia Reynolds', 'middleproductions@'),
+            ('Sports', 'Soccer Game', 'Everyone is invited to a quick soccer game this weekend.', 'Saul Costa', 'saulcosta18222@gmail.com'),
+            ('Resource', 'AndreWorks Studio', 'Available for reservations', 'Andrew Minor', 'aminor@andreworks.org'),
+            ('Event', 'Gymnastics Open Hours', 'Open to all age ranges', 'Lydia Kiles', 'opengym@opengym.org'),
+            ('Museum', 'Middle Age Weapons Musuem', 'Open 10-5 Daily', 'Brianna Wright', 'mawm@museums.org'),
+            ('Nature Site', 'Hunter Trail', 'Requires appropriate footwear', '', ''),
+            ('Cool Stuff', 'Alden Partridge Monument', 'In memory of the Norwich University Founder', '', ''),
+            ('Cool Stuff', 'Ski Range', 'Bring your skis!', '', ''),
+            ('Sports', 'Karate Lessons', 'Tae Kwon Do', 'Sensei Vivian', 'themaster@thekaratestudio.com'),
+            ('Nature Site', 'Crystal Mine Lake', 'No lifeguard on duty', 'Trevor Daniels', 'fri@.mns.org'),
+            ('Resource', 'School Supplies and Book Store', 'For all your education needs!', '', 'theotherstaples@bookstores.com'),
+            ('Musuem', 'Stone House Historical Center', 'With live in actors', 'Manny Curtis', 'mcurtis@stonehouse.org'),
+            ('Musuem', 'VT Historical Archives', 'Open 8 to 4 on weekdays', '', 'admin@vtarchives.org'),
+            ('Resource', 'Musical Studio', 'Instruments and soundrooms available to reserve', '', 'mstudio@vtmusic.net')
+        ]
+        for (category, title, description, host, email) in resources:
+            category = Category.query.filter_by(name=category).first()
+            if not category:
+                continue
+            Resource.create(
+                category_id=category.id,
+                title=title,
+                description=description,
+                host=host,
+                email=email,
+                longitude=random.uniform(-73.132, -72.632),
+                latitude=random.uniform(42.777, 44.953))
 
 
 def load_libraries():
