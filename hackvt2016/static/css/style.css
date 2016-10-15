@@ -30,10 +30,12 @@ textarea {
 #sidebar {
   border-right: 2px solid gray;
   height: 100%;
-  background-color: blue;
 }
 
 #map-container {
   height: 100%;
-  background-color: red;
+}
+
+body nav.navbar {
+  border-bottom: 2px solid gray;
 }
