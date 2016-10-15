@@ -75,6 +75,7 @@ textarea, input { outline: none; }
     width: 100%;
     margin-top: 2px;
     height: 50px;
+    margin-bottom: 15px;
 }
 
 #pac-input:focus {
@@ -127,10 +128,11 @@ textarea, input { outline: none; }
 
 .fa {
   display: block !important;
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 15px;
 }
 
 .category-name {
   font-size: 16px;
+  font-weight: 700;
 }
