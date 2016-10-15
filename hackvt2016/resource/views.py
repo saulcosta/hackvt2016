@@ -23,8 +23,7 @@ def index():
 
 @blueprint.route('/resources')
 def resources():
-  ids = map(int, request.args.values())
-  print(ids)
+  ids = map(int, request.args.getlist('ids[]'))
   data = Resource.query.filter(Resource.category_id.in_(ids)).all()
   data = map(object_as_dict, data)
   return jsonify(data)

@@ -84,6 +84,7 @@
         });
 
         var markers = [];
+        var data = [];
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function() {
@@ -148,15 +149,18 @@
           $.ajax({
             url: '/resources',
             data: { ids: cat_ids },
-            success: function(data) {
-                data.forEach(function(resource) {
+            success: function(resources) {
+                // reset old data
+                data.forEach(function(marker) {
+                  marker.setMap(null);
+                });
+                data = [];
+                resources.forEach(function(resource) {
 
                   r_location = {lat: resource.latitude, lng: resource.longitude};
 
-                  console.log(resource);
-
                   // Create a marker for each place.
-                  markers.push(new google.maps.Marker({
+                  data.push(new google.maps.Marker({
                     map: map,
                     title: resource.name,
                     position: r_location
