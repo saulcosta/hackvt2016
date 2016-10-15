@@ -32,6 +32,7 @@ textarea {
   border-right: 1px solid lightgray;
   height: 100%;
   padding-right: 0;
+  text-align: center;
 }
 
 #map-container {
@@ -135,4 +136,8 @@ textarea, input { outline: none; }
 .category-name {
   font-size: 16px;
   font-weight: 700;
+}
+
+button.btn-success {
+  margin-top: 200px;
 }

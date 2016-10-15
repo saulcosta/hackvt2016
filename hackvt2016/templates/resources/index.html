@@ -2,18 +2,18 @@
 {% extends "layout.html" %}
 {% block content %}
   <div class="row" style="height:100%">
-    <div class="col-md-3" id="sidebar">
+    <div class="col-xs-3" id="sidebar">
       <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 
       {% for (category1, category2) in categories %}
         <div class="row category-row">
-          <div class="col-md-6 category-outer">
+          <div class="col-xs-6 category-outer">
             <div class="category-inner" data-id={{category1.id}} style="border-color:#{{category1.color}}; color:#{{category1.color}}">
             <i class="fa fa-{{ category1.icon }}"></i>
             <span class="category-name">{{ category1.name }}</span>
             </div>
           </div>
-          <div class="col-md-6 category-outer">
+          <div class="col-xs-6 category-outer">
             <div class="category-inner" data-id={{category2.id}} style="border-color:#{{category2.color}}; color:#{{category2.color}}"> 
             <i class="fa fa-{{ category2.icon }}"></i>
             <span class="category-name">{{ category2.name }}</span>
@@ -21,11 +21,15 @@
           </div>
         </div>
       {% endfor %}
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Resource</button>
+
       </div>
-      <div class="col-md-9" id="map-container">
+      <div class="col-xs-9" id="map-container">
         <div id="map"></div>
         </div>
   </div>
+
+  {% include "resources/modal.html" %}
 
 <script>
 function initAutocomplete() {
@@ -115,6 +119,20 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 
+    // new resource logic
+    $('#submit-form').click(function() {
+      $.ajax({
+          url: '/new',
+          data: $('#new-resource-form').serialize(),
+          type: 'POST',
+          // contentType: 'application/json',
+          // dataType: 'json',
+          success: function(response) {
+              reloadData(JSON.parse(localStorage.getItem("cat_ids")));
+          }
+      });
+    });
+
     // category id logic
     localStorage.removeItem('cat_ids');
     $('.category-inner').click(function() {
@@ -135,7 +153,11 @@ function initAutocomplete() {
             localStorage.setItem("cat_ids", JSON.stringify(cat_ids));
 
             // Request data from server
-            $.ajax({
+            reloadData(cat_ids);
+    });
+
+    var reloadData = function(cat_ids) {
+        $.ajax({
                     url: '/resources',
                     data: {
                         ids: cat_ids
@@ -181,7 +203,7 @@ function initAutocomplete() {
                 },
                 dataType: 'json'
             });
-    });
+    }
 }
 
 </script>
