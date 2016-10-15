@@ -15,6 +15,5 @@ class Resource(SurrogatePK, Model):
     email = Column(db.String, nullable=True)
 
     category_id = reference_col('categories', nullable=False)
-    location_id = reference_col('locations', nullable=False)
 
 
