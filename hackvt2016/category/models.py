@@ -10,3 +10,4 @@ class Category(SurrogatePK, Model):
     __tablename__ = 'categories'
     name = Column(db.String(80), unique=True, nullable=False)
     icon = Column(db.String(80), unique=True, nullable=False)
+    color = Column(db.String(80), unique=True, nullable=False)

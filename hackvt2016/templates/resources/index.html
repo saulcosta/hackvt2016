@@ -8,13 +8,13 @@
       {% for (category1, category2) in categories %}
         <div class="row category-row">
           <div class="col-md-6 category-outer">
-            <div class="category-inner" data-id={{category1.id}}>
+            <div class="category-inner" data-id={{category1.id}} style="border-color:#{{category1.color}}; color:#{{category1.color}}">
             <i class="fa fa-{{ category1.icon }}"></i>
             <span class="category-name">{{ category1.name }}</span>
             </div>
           </div>
           <div class="col-md-6 category-outer">
-            <div class="category-inner" data-id={{category2.id}}> 
+            <div class="category-inner" data-id={{category2.id}} style="border-color:#{{category2.color}}; color:#{{category2.color}}"> 
             <i class="fa fa-{{ category2.icon }}"></i>
             <span class="category-name">{{ category2.name }}</span>
             </div>

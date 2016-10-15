@@ -122,6 +122,7 @@ textarea, input { outline: none; }
     border-radius: 5px;
     cursor: pointer;
     padding: 18px;
+    border-opacity: 0.8;
 }
 
 .fa {
