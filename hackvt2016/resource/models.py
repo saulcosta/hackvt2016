@@ -4,22 +4,6 @@ import datetime as dt
 
 from hackvt2016.database import Column, Model, SurrogatePK, db, reference_col, relationship
 
-class Category(SurrogatePK, Model):
-    """A category."""
-
-    __tablename__ = 'categories'
-    name = Column(db.String(80), unique=True, nullable=False)
-    icon = Column(db.String(80), unique=True, nullable=False)
-
-
-class Location(SurrogatePK, Model):
-    """A location."""
-
-    __tablename__ = 'locations'
-    address = Column(db.String, nullable=True)
-    longitude = Column(db.String, nullable=False)
-    latitude = Column(db.String, nullable=False)
-
 
 class Resource(SurrogatePK, Model):
     """A resource."""
