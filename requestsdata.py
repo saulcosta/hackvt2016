@@ -30,24 +30,24 @@ long: (-71.739) - (-72.632)
     for index in xrange(10):
         resources = [
             ('Sports', 'Softball Practice', 'Weekly softball practice - bring gear!', 'Theo Fido', 'tfo@softball.com'),
-            ('Event', 'Calligraphy Lesson', 'Workshop for Calligraphy Lessons', 'Tanner Riley', 'triley@clriley.com'),
-            ('Nature Site', 'Geocache', 'Placed in 1971', '', ''),
-            ('Event', 'Oliver Twist Rehearsal', 'Auditions for the Oliver Twist play', 'Julia Reynolds', 'middleproductions@yahoo.com'),
+            ('Event', 'Calligraphy Lesson', 'Workshop for Calligraphy Lessons on Tuesdays', 'Tanner Riley', 'triley@clriley.com'),
+            ('Nature Site', 'Geocache', 'Placed in 1971.', '', ''),
+            ('Event', 'Oliver Twist Auditions', 'Auditions for the Oliver Twist play begin at 3PM.', 'Julia Reynolds', 'middleproductions@yahoo.com'),
             ('Sports', 'Soccer Game', 'Everyone is invited to a quick soccer game this weekend.', 'Saul Costa', 'saulcosta18222@gmail.com'),
-            ('Resource', 'AndreWorks Studio', 'Available for reservations', 'Andrew Minor', 'aminor@andreworks.org'),
-            ('Event', 'Gymnastics Open Hours', 'Open to all age ranges', 'Lydia Kiles', 'opengym@opengym.org'),
-            ('Museum', 'Middle Age Weapons Musuem', 'Open 10-5 Daily', 'Brianna Wright', 'mawm@museums.org'),
-            ('Nature Site', 'Hunter Trail', 'Requires appropriate footwear', '', ''),
-            ('Cool Stuff', 'Alden Partridge Monument', 'In memory of the Norwich University Founder', '', ''),
+            ('Resource', 'AndreWorks Studio', 'Available for reservations!', 'Andrew Minor', 'aminor@andreworks.org'),
+            ('Event', 'Gymnastics Open Hours', 'Open to all age ranges!', 'Lydia Kiles', 'opengym@opengym.org'),
+            ('Museum', 'Middle Age Weapons Musuem', 'Open 10-5 Daily!', 'Brianna Wright', 'mawm@museums.org'),
+            ('Nature Site', 'Hunter Trail', 'Requires appropriate footwear.', '', ''),
+            ('Cool Stuff', 'Alden Partridge Monument', 'In memory of the Norwich University Founder.', '', ''),
             ('Sports', 'Ski Range', 'Bring your skis!', '', ''),
             ('Sports', 'Karate Lessons', 'Tae Kwon Do', 'Sensei Vivian', 'themaster@thekaratestudio.com'),
-            ('Nature Site', 'Crystal Mine Lake', 'No lifeguard on duty', 'Trevor Daniels', 'fri@.mns.org'),
+            ('Nature Site', 'Crystal Mine Lake', 'No lifeguard on duty!', 'Trevor Daniels', 'fri@.mns.org'),
             ('Resource', 'School Supplies and Book Store', 'For all your education needs!', '', 'theotherstaples@bookstores.com'),
-            ('Musuem', 'Stone House Historical Center', 'With live in actors', 'Manny Curtis', 'mcurtis@stonehouse.org'),
-            ('Musuem', 'VT Historical Archives', 'Open 8 to 4 on weekdays', '', 'admin@vtarchives.org'),
-            ('Resource', 'Musical Studio', 'Instruments and soundrooms available to reserve', '', 'mstudio@vtmusic.net')
+            ('Musuem', 'Stone House Historical Center', 'With live-in actors!', 'Manny Curtis', 'mcurtis@stonehouse.org'),
+            ('Musuem', 'VT Historical Archives', 'Open 8 to 4 on weekdays.', '', 'admin@vtarchives.org'),
+            ('Resource', 'Musical Studio', 'Instruments and soundrooms available to reserve!', '', 'mstudio@vtmusic.net')
 
-            ('Museum', 'Black Manor Historical House', 'Provides historical reenactments on Mondays and Thursdays', 'Tia Ramirez', 'tramirez@blackmanor.edu')
+            ('Museum', 'Black Manor Historical House', 'Provides historical reenactments on Mondays and Thursdays!', 'Tia Ramirez', 'tramirez@blackmanor.edu')
 
             ('Nature Site', 'Red Fern Bike Trail', 'Maps are available at all entrances.', '', 'infotrails@parksandrecvt.gov')
             ('Nature Site', 'Westerman Bird Viewing Platform', '', '', 'infobirds@parksandrecvt.gov')
@@ -65,10 +65,9 @@ long: (-71.739) - (-72.632)
             ('Cool Stuff', 'Old Weeping Willow Tree', 'Planted 1900', '', '')
 
             ('Sports', 'Horseback Riding Lessons', 'Beginner to Advanced lessons provided!', 'Leonard McGarth', 'horseback@horsebackvt.info')
-            ('Sports', 'Hockey Tryouts', 'Open to grades 5-8, gear provided', 'Olivia Olsen', 'olsen@watervillemiddle.com')
-            ('Sports', 'Swimming Lessons', 'Group classes and one-on-one mentoring offered', '', 'lessons@swimvt.com')
-            ('Sports', 'Cross Country Practice', 'We will be starting with 3 miles on Tuesday.', 'Gina Woo', 'gwoo@tritonhs.com')
-
+            ('Sports', 'Hockey Tryouts', 'Open to grades 5-8, gear provided.', 'Olivia Olsen', 'olsen@watervillemiddle.com')
+            ('Sports', 'Swimming Lessons', 'Group classes and one-on-one mentoring offered.', '', 'lessons@swimvt.com')
+            ('Sports', 'Cross Country Practice', 'We will be starting with a 3 mile run on Tuesday.', 'Gina Woo', 'gwoo@tritonhs.com')
 
 
 
