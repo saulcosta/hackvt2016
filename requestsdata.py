@@ -56,8 +56,8 @@ long: (-71.739) - (-72.632)
             description=description,
             host=host,
             email=email,
-            longitude=longitude,
-            latitude=latitude)
+            longitude=random.uniform(-73.132, -72.632),
+            latitude=random.uniform(42.777, 44.953))
 
 
 def load_libraries():
