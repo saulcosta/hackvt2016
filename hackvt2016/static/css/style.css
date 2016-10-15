@@ -30,12 +30,27 @@ textarea {
 #sidebar {
   border-right: 2px solid gray;
   height: 100%;
+  padding-right: 0;
 }
 
 #map-container {
   height: 100%;
+  padding: 0;
 }
+
+#map {
+        height: 100%;
+        width: 100%;
+       }
 
 body nav.navbar {
   border-bottom: 2px solid gray;
 }
+
+#address-input {
+  width: 100%;
+  height: 50px;
+  font-size:18px;
+}
+
+textarea, input { outline: none; }
