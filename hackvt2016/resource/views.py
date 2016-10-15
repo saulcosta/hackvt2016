@@ -2,7 +2,7 @@
 """User views."""
 from flask import Blueprint, render_template
 
-blueprint = Blueprint('resource', __name__, url_prefix='/resources', static_folder='../static')
+blueprint = Blueprint('resource', __name__, static_folder='../static')
 
 
 @blueprint.route('/')
