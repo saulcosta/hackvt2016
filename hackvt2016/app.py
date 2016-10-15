@@ -5,10 +5,10 @@ from flask import Flask, render_template
 from hackvt2016 import commands, public, user, resource, category
 from hackvt2016.assets import assets
 from hackvt2016.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
-from hackvt2016.settings import ProdConfig
+from hackvt2016.settings import DevConfig
 
 
-def create_app(config_object=ProdConfig):
+def create_app(config_object=DevConfig):
     """An application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
 
     :param config_object: The configuration object to use.

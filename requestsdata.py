@@ -1,35 +1,40 @@
 import requests
+from hackvt2016.app import create_app
 from hackvt2016.resource.models import Resource
 
+def main():
+    create_app().app_context().push()
+    thisRequest = requests.get("https://data.vermont.gov/resource/g5rt-gwwe")
+    jsonObject = thisRequest.json()
+    jsonObject[0]
 
-thisRequest = requests.get("https://data.vermont.gov/resource/g5rt-gwwe")
-jsonObject = thisRequest.json()
-jsonObject[0]
-
-#print(jsonObject)
-
-
-
-for entry in jsonObject:
-	category = "library"
-	location = "location"
-	title = entry.get("library")
-	description = "Town Public Library"
-	host = ""
-	email = ""
-	locationID = 1
-	categoryID = 1
+    #print(jsonObject)
 
 
-#Resource.create(title=title, description=description,host=host, email=email,location_id=locationID,category_id=categoryID)
-Resource.create(title=title, description=description,host=host, email=email)
+
+    for entry in jsonObject:
+    	category = "library"
+    	location = "location"
+    	title = entry.get("library")
+    	description = "Town Public Library"
+    	host = ""
+    	email = ""
+    	locationID = 1
+    	categoryID = 1
 
 
-	#pull each attribute from data set
+    #Resource.create(title=title, description=description,host=host, email=email,location_id=locationID,category_id=categoryID)
+    Resource.create(title=title, description=description,host=host, email=email)
 
 
-#print(jsonObject[0].get("type_access"))
+    	#pull each attribute from data set
 
-#create csv reader
 
-#
+    #print(jsonObject[0].get("type_access"))
+
+    #create csv reader
+
+    #
+
+if __name__ == '__main__':
+    main()
